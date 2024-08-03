@@ -1,0 +1,67 @@
+# Node modules
+/node_modules/
+
+# Build output
+/build/
+dist/
+
+# Log files
+*.log
+
+# Dependency directories
+**/node_modules/
+
+# dotenv environment variable files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js build output
+.next/
+
+# TypeScript build output
+*.tsbuildinfo
+
+# Mac system files
+.DS_Store
+
+# IDE and editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Yarn Integrity file
+.yarn-integrity
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build directories
+/build
+/dist
+
+# Jest test coverage
+/coverage
+
+# React Native
+.expo
+*.expo
+*.expo-shared
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Miscellaneous
+*.pem
+*.key
+*.crt
+
+# Mac system files
+*.DS_Store
