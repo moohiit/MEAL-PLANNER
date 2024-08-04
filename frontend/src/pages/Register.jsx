@@ -1,24 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { TextField, Button, Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
+import { TextField, Button, Typography, Grid } from '@mui/material';
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
+  const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Hook for navigation
 
   const onSubmit = async (data) => {
     try {
       await axios.post('http://localhost:5000/api/users/register', data);
-      // Redirect or show success
+      console.log('User registered successfully');
+      navigate('/login'); // Redirect to the login page
     } catch (error) {
-      // Handle error
+      setError(error.response.data.message);
+      console.log('Register Error: ', error.response.data.message);
     }
   };
 
   return (
-    <div>
-      <Typography variant="h4">Register</Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className='mx-auto min-w-64 max-w-md mt-14 p-16 bg-slate-300 rounded-md  backdrop-contrast-100  flex flex-col justify-center items-center'>
+      <Typography variant="h4" color="grey">Register</Typography>
+      <form className='flex flex-col flex-grow' onSubmit={handleSubmit(onSubmit)}>
+        {error && <Typography color="error">{error}</Typography>}
         <TextField
           label="Name"
           {...register('name', { required: true })}
@@ -39,10 +45,20 @@ const Register = () => {
           fullWidth
           margin="normal"
         />
-        <Button type="submit" variant="contained" color="primary">
+        <Button className='text-center self-center' type="submit" variant="contained" color="primary">
           Register
         </Button>
       </form>
+      <Grid>Already have an account?
+        <Button
+          component={Link}
+          to="/login"
+          color="secondary"
+          size="large"
+        >
+          Login
+        </Button>
+      </Grid>
     </div>
   );
 };

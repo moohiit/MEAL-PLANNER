@@ -7,6 +7,7 @@ import RecoilProvider from './context/RecoilProvider';
 import { Container, CssBaseline } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
         <CssBaseline />
         <Container>
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
           <ToastContainer />
         </Container>

@@ -1,28 +1,39 @@
-import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
+import { Link, useNavigate } from 'react-router-dom';
 import { authState } from '../state/authState';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Grid } from '@mui/material';
+
+
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [auth, setAuth] = useRecoilState(authState);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', data);
       setAuth({ token: response.data.token });
+      localStorage.setItem('token', response.data.token);
+      console.log('Token: ', response.data.token)
       // Redirect or show success
+      navigate('/dashboard')
     } catch (error) {
-      // Handle error
+      // set the error
+      setError(error.response.data.message);
+      console.log('Login Error: ', error.response.data.message);
     }
   };
 
   return (
-    <div>
-      <Typography variant="h4">Login</Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className='mx-auto min-w-64 max-w-md mt-14 p-16 bg-slate-300 rounded-md  backdrop-contrast-100  flex flex-col justify-center items-center'>
+      <Typography variant="h3" color={'gray'}>Login</Typography>
+      {error && <Typography color="error">{error}</Typography>}
+      <form className='flex flex-col flex-grow' onSubmit={handleSubmit(onSubmit)}>
         <TextField
           label="Email"
           type="email"
@@ -37,10 +48,20 @@ const Login = () => {
           fullWidth
           margin="normal"
         />
-        <Button type="submit" variant="contained" color="primary">
+        <Button className='text-center self-center' type="submit" variant="contained"  color="primary">
           Login
         </Button>
       </form>
+      <Grid>Don't have an account?
+        <Button
+          component={Link}
+          to="/register"
+          color="secondary"
+          size="large"
+        >
+          Register
+        </Button>
+      </Grid>
     </div>
   );
 };
