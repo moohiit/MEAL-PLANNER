@@ -8,6 +8,10 @@ import { Container, CssBaseline } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import Recipes from './pages/Recipes';
+import RecipeSearch from './pages/RecipeSearch';
+import MealPlan from './pages/MealPlan';
 
 function App() {
   return (
@@ -20,6 +24,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            {/* Add more routes as needed */}
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipeSearch" element={<RecipeSearch />} />
+            <Route path="/mealPlan" element={<MealPlan />} />
           </Routes>
           <ToastContainer />
         </Container>

@@ -17,9 +17,10 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', data);
-      setAuth({ token: response.data.token });
+      setAuth({ token: response.data.token,user:response.data.user, authenticated:true });
       localStorage.setItem('token', response.data.token);
       console.log('Token: ', response.data.token)
+      console.log(auth.user);
       // Redirect or show success
       navigate('/dashboard')
     } catch (error) {

@@ -49,7 +49,7 @@ export const loginUser = async (req, res) => {
       expiresIn: "1h",
     });
     console.log("Message: User logged in successfully\n Token: ",token);
-    res.status(200).json({ token });
+    res.status(200).json({ token:token,user:user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -67,4 +67,32 @@ export const getUserDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+
+export const logoutUser = async (req, res) => {
+  try {
+    res.status(200).json({ message: "Logged out successfully" });
+    console.log("Logged out successfully");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+export const getUserProfile = async (req, res) => {
+  try {
+    if (!req.userId) {
+      return res.send("Userid not Found.");
+    }
+    console.log("UserId: ", req.userId);
+    const user = await User.findById(req.userId).select("-password");
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const updateUserPreferences = async (req, res) => {
+  const { dietaryPreferences } = req.body;
+  const user = await User.findByIdAndUpdate(req.userId, { dietaryPreferences }, { new: true });
+  res.json(user);
+};
 
