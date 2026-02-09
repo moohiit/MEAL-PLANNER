@@ -236,6 +236,18 @@ Visit `http://localhost:3000` for the frontend and `http://localhost:5000` for t
 - **Frontend Testing**: Test UI components and their integration with backend APIs.
 - **Integration Testing**: Ensure data flows correctly between frontend and backend.
 
+## Pending Critical Tasks
+
+- **Wire up missing API routes**: Mount recipe and meal plan routes in `backend/server.js` so these endpoints are reachable.
+- **Fix controller imports**: Add missing model imports in `backend/src/controllers/recipe.controllers.js` and `backend/src/controllers/mealPlan.controllers.js`.
+- **Add input validation**: Validate request payloads for auth, recipes, and meal plans to prevent malformed data.
+- **Harden auth middleware**: Handle missing/invalid `Authorization` headers gracefully to avoid runtime crashes.
+- **Create shopping list endpoints**: Add routes/controllers for shopping list CRUD using `shoppingList.model.js`.
+- **Connect frontend to APIs**: Implement API calls from React pages, including token handling and error states.
+- **Protect authenticated routes**: Gate pages like Dashboard/Profile/MealPlan based on auth state.
+- **Environment configuration**: Add `.env` templates for backend/frontend with required variables.
+- **Testing coverage**: Add unit/integration tests for key backend routes and frontend components.
+
 ## Contribution
 
 Feel free to fork this repository and submit pull requests. Contributions are welcome!
